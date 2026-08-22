@@ -13,12 +13,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import Framework.SeleniumFramework.PageObjects.Login;
 
-public class ECommerce {
+public class ECommerce2 {
 
 	public static void main(String[] args) throws InterruptedException {
 
 		WebDriver driver = new ChromeDriver();
-
+		
+		Login obj =new Login(driver);
+			
 		String items = "ZARA COAT 3";
 
 		driver.manage().window().maximize();
@@ -26,12 +28,8 @@ public class ECommerce {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
 		driver.get("https://rahulshettyacademy.com/client");
-
-		driver.findElement(By.id("userEmail")).sendKeys("shield@gmail.com");
-
-		driver.findElement(By.id("userPassword")).sendKeys("Captain@123");
-
-		driver.findElement(By.name("login")).click();
+	
+		obj.login("shield@gmail.com", "Captain@123");
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
