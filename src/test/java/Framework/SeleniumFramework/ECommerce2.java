@@ -22,6 +22,8 @@ public class ECommerce2 {
 		Login obj =new Login(driver);
 			
 		String items = "ZARA COAT 3";
+		
+		String country="India";
 
 		driver.manage().window().maximize();
 
@@ -30,46 +32,47 @@ public class ECommerce2 {
 		driver.get("https://rahulshettyacademy.com/client");
 	
 		obj.login("shield@gmail.com", "Captain@123");
+		
+		List <WebElement> products= obj.getProductList();
+		
+		obj.addToCart(items);
+		
+		obj.clickingCartIcon();
+		
+		obj.getCartProducts(items);
+		
+		obj.clickCheckoutButton();
+		
+		obj.setCountry(country);
 
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-		List<WebElement> products = driver.findElements(By.cssSelector(".col-lg-4"));
-
-		WebElement prod = products.stream().filter(p -> p.findElement(By.cssSelector("b")).getText().equals(items))
-				.findFirst().orElse(null);
-
-		prod.findElement(By.cssSelector(".col-lg-4 button:last-of-type")).click();
-
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("ng-animating"))); //
-
-		driver.findElement(By.cssSelector("button[routerlink*=cart]")).click();
-
-		List<WebElement> cartProducts = driver.findElements(By.cssSelector(".cart h3"));
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-
-		js.executeScript("window.scrollBy(0,500)");
-
-		cartProducts.stream().anyMatch(p -> p.getText().equalsIgnoreCase(items));
-
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Checkout']")));
-
-		driver.findElement(By.xpath("//button[text()='Checkout']")).click();
-
-		driver.findElement(By.xpath("//input[@placeholder='Select Country']")).sendKeys("India");
-
-		String country = "India";
-		List<WebElement> countryList = driver
-				.findElements(By.xpath("//input[@placeholder='Select Country'] / following-sibling::section/button"));
-
-		for (int i = 0; i < countryList.size(); i++) {
-
-			if (countryList.get(i).getText().equalsIgnoreCase(country)) {
-				countryList.get(i).click();
-			}
-		}
-
-		driver.findElement(By.cssSelector(".action__submit")).click();
+		obj.submitBttn();
+//		
+//		List<WebElement> cartProducts = driver.findElements(By.cssSelector(".cart h3"));
+//
+//		JavascriptExecutor js = (JavascriptExecutor) driver;
+//
+//		js.executeScript("window.scrollBy(0,500)");
+//
+//		cartProducts.stream().anyMatch(p -> p.getText().equalsIgnoreCase(items));
+//
+//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Checkout']")));
+//
+//		driver.findElement(By.xpath("//button[text()='Checkout']")).click();
+//
+//		driver.findElement(By.xpath("//input[@placeholder='Select Country']")).sendKeys("India");
+//
+//		String country = "India";
+//		List<WebElement> countryList = driver
+//				.findElements(By.xpath("//input[@placeholder='Select Country'] / following-sibling::section/button"));
+//
+//		for (int i = 0; i < countryList.size(); i++) {
+//
+//			if (countryList.get(i).getText().equalsIgnoreCase(country)) {
+//				countryList.get(i).click();
+//			}
+//		}
+//
+//		driver.findElement(By.cssSelector(".action__submit")).click();
 
 		driver.quit();
 
