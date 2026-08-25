@@ -1,4 +1,4 @@
-package Framework.SeleniumFramework;
+package framework.TestCases;
 
 import java.time.Duration;
 import java.util.List;
@@ -10,8 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import Framework.SeleniumFramework.PageObjects.Login;
 
 public class ECommerce {
 

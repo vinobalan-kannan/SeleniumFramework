@@ -1,4 +1,4 @@
-package Framework.SeleniumFramework.PageObjects;
+package framework.PageObjects;
 
 import java.time.Duration;
 
