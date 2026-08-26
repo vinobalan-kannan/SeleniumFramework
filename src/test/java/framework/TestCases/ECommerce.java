@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class ECommerce {
 
@@ -17,6 +18,8 @@ public class ECommerce {
 
 		WebDriver driver = new ChromeDriver();
 
+		String confirmationText="Thankyou for the order.";
+		
 		String items = "ZARA COAT 3";
 
 		driver.manage().window().maximize();
@@ -50,7 +53,9 @@ public class ECommerce {
 
 		js.executeScript("window.scrollBy(0,500)");
 
-		cartProducts.stream().anyMatch(p -> p.getText().equalsIgnoreCase(items));
+		Boolean res =cartProducts.stream().anyMatch(p -> p.getText().equalsIgnoreCase(items));
+		
+		Assert.assertTrue(res);
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Checkout']")));
 
@@ -70,7 +75,9 @@ public class ECommerce {
 		}
 
 		driver.findElement(By.cssSelector(".action__submit")).click();
-
+		
+		confirmationText.equalsIgnoreCase(driver.findElement(By.xpath("//h1[contains(text(),'Thankyou')]")).getText().trim());
+		
 		driver.quit();
 
 	}
