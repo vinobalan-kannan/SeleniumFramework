@@ -5,6 +5,7 @@
     <classes>
       <class name="framework.TestCases.ECommerce2">
         <methods>
+          <include name="clossingSession"/>
           <include name="submitOrder"/>
           <include name="launchingBrowser"/>
         </methods>

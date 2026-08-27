@@ -9,6 +9,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -16,8 +17,17 @@ public class Utilities {
 
 	WebDriver driver;
 
+	@FindBy(css = "button[routerlink*=cart]")
+	WebElement cartIcon;
+	
+
 	public Utilities(WebDriver driver) {
 		this.driver = driver;
+	}
+
+	public void goToCartPage() {
+		safeClick(cartIcon);
+		
 	}
 
 	public void safeClick(WebElement ele) {
@@ -34,11 +44,9 @@ public class Utilities {
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException ignored) {
-
 				}
 			}
 		}
-
 	}
 
 	public void waitForElementToBeClickable(WebElement findBy) {

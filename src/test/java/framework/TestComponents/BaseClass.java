@@ -10,12 +10,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import framework.PageObjects.Login;
+import framework.PageObjects.LandingPage;
 
 public class BaseClass {
 
 	public WebDriver driver;
-	public Login obj;
+	public LandingPage obj;
 
 	public WebDriver intializeDriver() throws IOException {
 
@@ -38,10 +38,10 @@ public class BaseClass {
 	}
 	
 	@BeforeMethod
-	public Login launchingBrowser() throws IOException
+	public LandingPage launchingBrowser() throws IOException
 	{
 		intializeDriver();
-		obj=new Login(driver);
+		obj=new LandingPage(driver);
 		driver.get("https://rahulshettyacademy.com/client");
 		return obj;
 	}
@@ -49,7 +49,7 @@ public class BaseClass {
 	@AfterMethod
 	public void clossingSession()
 	{
-		driver.quit();
+		driver.close();
 
 	}
 

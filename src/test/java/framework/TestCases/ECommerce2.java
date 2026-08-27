@@ -1,13 +1,14 @@
 package framework.TestCases;
 
 import java.io.IOException;
-import java.util.List;
 
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import framework.PageObjects.Login;
+import framework.PageObjects.CartPage;
+import framework.PageObjects.ConfirmationPage;
+import framework.PageObjects.PlaceOrderPage;
+import framework.PageObjects.ProductPage;
 import framework.TestComponents.BaseClass;
 
 public class ECommerce2 extends BaseClass {
@@ -21,27 +22,30 @@ public class ECommerce2 extends BaseClass {
 
 		String confirmationText = "Thankyou for the order.";
 
-		//Login obj = launchingBrowser();
-
 		obj.login("shield@gmail.com", "Captain@123");
 
-		obj.addToCart(items);
+		ProductPage productpage = new ProductPage(driver);
 
-		obj.clickingCartIcon();
+		productpage.addToCart(items);
 
-		Assert.assertTrue(obj.getCartProducts(items));
+		productpage.goToCartPage();
 
-		obj.clickCheckoutButton();
-
-		obj.setCountry(country);
-
-		obj.submitBttn();
-
-		Assert.assertTrue(obj.verifyConfirmation(confirmationText));
-//		
+		CartPage cartpageobj = new CartPage(driver);
 		
-//		
-//		
+		Assert.assertTrue(cartpageobj.getCartProducts(items));
+
+		cartpageobj.clickCheckoutButton();
+
+		PlaceOrderPage placeorderpage = new PlaceOrderPage(driver);
+
+		placeorderpage.setCountry(country);
+
+		placeorderpage.submitBttn();
+
+		ConfirmationPage confirmpage = new ConfirmationPage(driver);
+
+		Assert.assertTrue(confirmpage.verifyConfirmation(confirmationText));
+
 	}
 
 }

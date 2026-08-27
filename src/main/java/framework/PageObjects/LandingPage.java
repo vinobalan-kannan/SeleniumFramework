@@ -1,0 +1,37 @@
+package framework.PageObjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class LandingPage extends Utilities {
+
+	WebDriver driver;
+
+	public LandingPage(WebDriver driver) {
+		super(driver);
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+
+	}
+
+	@FindBy(id = "userEmail")
+	WebElement email;
+
+	@FindBy(id = "userPassword")
+	WebElement psswrd;
+
+	@FindBy(name = "login")
+	WebElement login;
+
+	
+
+	public void login(String emailId, String password) {
+		email.sendKeys(emailId);
+		psswrd.sendKeys(password);
+		login.click();
+	}
+
+	
+}
